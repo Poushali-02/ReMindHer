@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menstrual Tracker</title>
+    <style>
+/* Reset */
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #e0b3ff, #ffcce5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #4a005f;
+}
+
+/* Container */
+.container {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Heading */
+.container h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #8700a4;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* Labels */
+label {
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: #4a005f;
+}
+
+/* Inputs */
+input[type="date"] {
+    padding: 0.7rem;
+    border-radius: 10px;
+    border: 1px solid #d49add;
+    background-color: #fff0fa;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input[type="date"]:focus {
+    border-color: #a100c9;
+    box-shadow: 0 0 5px rgba(161, 0, 201, 0.3);
+}
+
+/* Submit Button */
+button[type="submit"] {
+    background-color: #a100c9;
+    color: white;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #cc33ff;
+    transform: translateY(-2px);
+}
+
+button[type="submit"]:active {
+    background-color: #8700a4;
+    transform: scale(0.98);
+}
+
+/* Message Box */
+.message {
+    background-color: #fff0fa;
+    border: 2px solid #d49add;
+    color: #4a005f;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* Hidden class to hide form after submission */
+.hidden {
+    display: none;
+}
+
+/* Go back link */
+a {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #a100c9;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #cc33ff;
+}
+
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Menstrual Tracker</h1>
+        {% if message %}
+        <div class="message">
+            {{ message }}
+            <a href="/">Go back</a>
+        </div>
+        {% endif %}
+        <form action="/menstrual_tracker" method="post" class="{% if message %}hidden{% endif %}">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required>
+
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" required>
+
+            <button type="submit">Track Period</button>
+            <a href="/">Go back</a>
+        </form>
+    </div>
+</body>
+</html>

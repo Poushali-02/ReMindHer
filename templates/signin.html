@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <style>
+        /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #e0b3ff, #ffcce5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #4a005f;
+}
+
+/* Container Styling */
+.container {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem 3rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+/* Inputs and Select */
+input,
+select {
+    margin-bottom: 1.5rem;
+    padding: 0.7rem;
+    border-radius: 10px;
+    border: 1px solid #d49add;
+    background-color: #fff0fa;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #a100c9;
+    box-shadow: 0 0 5px rgba(161, 0, 201, 0.3);
+}
+
+/* Optional: Submit button (if you add later) */
+button[type="submit"] {
+    background-color: #a100c9;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #cc33ff;
+}
+.btn {
+    font-family: 'Segoe UI', sans-serif;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Primary Style */
+.btn-primary {
+    background-color: #a100c9;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(161, 0, 201, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: #cc33ff;
+    box-shadow: 0 6px 18px rgba(204, 51, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-primary:active {
+    background-color: #8700a4;
+    transform: scale(0.98);
+}
+.hidden {
+    display: none;
+}
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        {% if message %}
+            <div class="message">
+                <h2>{{ message }}</h2>
+                <a href="/">Go Back</a>
+            </div>
+        {% endif %}
+        <form method="post" action="/signin"  class="{% if message %}hidden{% endif %}"">
+
+            <!-- name -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="username" required>
+
+            <!-- email -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="with @ and ." required>
+
+            <!-- password -->
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="password" required>
+
+            <!-- age -->
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="0" placeholder="age" required>
+
+            <!-- phone -->
+            <label for="phone">Contact Number:</label>
+            <input type="tel" id="phone" name="phone" placeholder="contact number" required>
+
+            <!-- locality -->
+            <label for="locality">Locality:</label>
+            <input type="text" id="locality" name="locality" placeholder="locality" required>
+
+            <!-- language -->
+            <label for="language">Language:</label>
+            <select id="language" name="language" required>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="submit" value="Sign in" type="submit" class="btn btn-primary">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menstrual Cycle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Learning Section */
+.learning-section {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Header */
+.learning-section .section-header h2 {
+    font-size: 2.5rem;
+    color: #8b00c9;
+    font-weight: 700;
+}
+
+.learning-section .section-header p {
+    font-size: 1.2rem;
+    color: #5c0066;
+}
+
+/* Article Content */
+.learning-section .content {
+    margin-top: 2rem;
+    line-height: 1.7;
+    color: #2d033b;
+}
+
+.learning-section .content h3 {
+    font-size: 1.6rem;
+    margin-top: 2rem;
+    color: #9900cc;
+    border-left: 5px solid #d966ff;
+    padding-left: 10px;
+}
+
+.learning-section .content p {
+    margin-bottom: 1rem;
+}
+
+.learning-section .content ol,
+.learning-section .content ul {
+    margin-left: 1.5rem;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.learning-section .content li {
+    margin-bottom: 0.6rem;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+    .learning-section {
+        padding: 2rem 1.5rem;
+    }
+
+    .learning-section .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .learning-section .content h3 {
+        font-size: 1.4rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">ReMindHer</div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/pcod">PCOD Checker</a></li>
+            <li><a href="/menstrual_tracker">Menstrual Tracker</a></li>
+            <li><a href="#">Doctor</a></li>
+            <li><a href="#">Hormone Tracker</a></li>
+            <li><a href="/learn">Learning Section</a></li>
+            <li><a href="/signin">Sign in</a></li>
+            <li><a href="#">Log in</a></li>
+            <li><a href="#">Log out</a></li>
+            <li><button class="voice-btn" aria-label="Voice Assistance">🎤 Voice</button></li>
+        </ul>
+    </nav>
+    <section id="learning-menstrual-cycle" class="learning-section py-5">
+    <div class="container">
+        <div class="section-header text-center mb-4">
+            <h2 class="display-5">The Menstrual Cycle</h2>
+            <p class="lead text-muted">Phases, Hormonal Regulation, and Clinical Significance</p>
+        </div>
+
+        <article class="content">
+            <section class="mb-5">
+                <h3 class="h4">Introduction</h3>
+                <p>
+                    The menstrual cycle is a complex, hormonally-regulated process that occurs in the female reproductive system and prepares the body for potential pregnancy. It typically begins during puberty (menarche) and ends with menopause, affecting nearly half of the global population for a significant portion of their lives. A normal cycle ranges from 21 to 35 days, with 28 days being the average. Understanding the physiological changes that occur during the cycle is vital for assessing reproductive health, diagnosing disorders, and guiding fertility treatments.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Phases of the Menstrual Cycle</h3>
+                <p>The menstrual cycle is divided into four major phases:</p>
+                <ol>
+                    <li><strong>Menstrual Phase (Days 1–5):</strong> Characterized by the shedding of the uterine lining. Typically lasts 3–7 days due to decreased estrogen and progesterone.</li>
+                    <li><strong>Follicular Phase (Days 1–13):</strong> FSH stimulates follicle growth, increasing estrogen, which regenerates the endometrial lining.</li>
+                    <li><strong>Ovulation (Day 14):</strong> A surge in LH causes the release of a mature egg. This is the most fertile period of the cycle.</li>
+                    <li><strong>Luteal Phase (Days 15–28):</strong> The corpus luteum secretes progesterone to prepare for possible implantation. If no fertilization occurs, hormone levels drop and menstruation starts.</li>
+                </ol>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Hormonal Regulation</h3>
+                <p>
+                    The menstrual cycle is controlled by the hypothalamic-pituitary-ovarian (HPO) axis:
+                </p>
+                <ul>
+                    <li><strong>FSH & LH:</strong> Stimulate follicle development and ovulation.</li>
+                    <li><strong>Estrogen:</strong> Promotes uterine lining growth and triggers LH surge.</li>
+                    <li><strong>Progesterone:</strong> Stabilizes the endometrium and prevents further ovulation.</li>
+                </ul>
+                <p>
+                    Hormonal changes also affect mood, skin, hair, and energy levels throughout the cycle.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Clinical Relevance</h3>
+                <p>
+                    Regular cycles indicate reproductive health. Irregularities such as amenorrhea, menorrhagia, or dysmenorrhea may signal conditions like PCOS, thyroid issues, or endometriosis. Understanding the cycle is vital for both diagnosis and family planning. Contraceptives and fertility tracking rely on insights into these phases.
+                </p>
+            </section>
+
+            <section>
+                <h3 class="h4">Conclusion</h3>
+                <p>
+                    The menstrual cycle is a vital biological rhythm that reflects reproductive and hormonal health. Awareness and education on its mechanisms are essential for early diagnosis, effective treatment, and menstrual health advocacy. A deep understanding fosters empowerment and reduces stigma.
+                </p>
+            </section>
+        </article>
+    </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #e0b3ff, #ffcce5);
+    color: #2d033b;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-brand {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #a100c9;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4a005f;
+    font-weight: 500;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: #f3d1f4;
+    color: #a100c9;
+}
+
+.voice-btn {
+    background: #a100c9;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.voice-btn:hover {
+    background: #cc33ff;
+}
+
+/* Hamburger menu placeholder (optional JS toggle logic) */
+.nav-toggle {
+    display: none; /* Hide for now unless needed on mobile */
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #4a005f;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #8b00c9;
+}
+
+header p {
+    font-size: 1.25rem;
+    color: #5c0066;
+    max-width: 600px;
+    margin: 0 auto;
+}
