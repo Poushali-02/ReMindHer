@@ -131,7 +131,10 @@
             <li><button class="voice-btn" aria-label="Voice Assistance">🎤 Voice</button></li>
         </ul>
     </nav>
-
+    <header>
+        <h1>Welcome to the learning section of ReMindHer</h1>
+        <p>Learn about the female anatomy, break the taboo</p>
+    </header>
   <section class="learning-grid">
     <div class="card-grid" id="cardGrid">
 
@@ -139,7 +142,7 @@
         <div class="card-front">
           <h3>The Menstrual Cycle</h3>
           <p>Understanding the hormonal phases and health impact of menstruation.</p>
-          <a href="{{ url_for('menstrual') }}">More →</a>
+          <a href="{{ url_for('learn_menstrual') }}">More →</a>
 
         </div>
       </div>
@@ -148,7 +151,7 @@
         <div class="card-front">
           <h3>PCOD & PCOS</h3>
           <p>Learn the difference between PCOD and PCOS and how to manage them.</p>
-          <a href="pcodPcos.html">More →</a>
+          <a href="{{ url_for('learn_pcod') }}">More →</a>
         </div>
       </div>
 
@@ -156,7 +159,7 @@
         <div class="card-front">
           <h3>Pregnancy Guide</h3>
           <p>A month-by-month breakdown of pregnancy, development, and care.</p>
-          <a href="pregnancy.html">More →</a>
+          <a href="{{ url_for('learn_pregnancy') }}">More →</a>
         </div>
       </div>
 
@@ -164,7 +167,7 @@
         <div class="card-front">
           <h3>Menstrual Hygiene</h3>
           <p>Best practices for hygiene, products, and comfort during periods.</p>
-          <a href="hygeine.html">More →</a>
+          <a href="{{ url_for('learn_female_hygiene') }}">More →</a>
         </div>
       </div>
 
@@ -172,7 +175,7 @@
         <div class="card-front">
           <h3>Nutrition & Diet</h3>
           <p>Understand female-specific dietary needs across life stages.</p>
-          <a href="diet.html">More →</a>
+          <a href="{{ url_for('learn_diet') }}">More →</a>
         </div>
       </div>
 
@@ -180,7 +183,7 @@
         <div class="card-front">
           <h3>Yoga & Exercise</h3>
           <p>How physical activity supports hormonal balance and mental health.</p>
-          <a href="yoga.html">More →</a>
+          <a href="{{ url_for('learn_yoga') }}">More →</a>
         </div>
       </div>
 

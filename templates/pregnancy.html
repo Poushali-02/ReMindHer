@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregnancy Guide</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Learning Section */
+.learning-section {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Header */
+.learning-section .section-header h2 {
+    font-size: 2.5rem;
+    color: #8b00c9;
+    font-weight: 700;
+}
+
+.learning-section .section-header p {
+    font-size: 1.2rem;
+    color: #5c0066;
+}
+
+/* Article Content */
+.learning-section .content {
+    margin-top: 2rem;
+    line-height: 1.7;
+    color: #2d033b;
+}
+
+.learning-section .content h3 {
+    font-size: 1.6rem;
+    margin-top: 2rem;
+    color: #9900cc;
+    border-left: 5px solid #d966ff;
+    padding-left: 10px;
+}
+
+.learning-section .content p {
+    margin-bottom: 1rem;
+}
+
+.learning-section .content ol,
+.learning-section .content ul {
+    margin-left: 1.5rem;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.learning-section .content li {
+    margin-bottom: 0.6rem;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+    .learning-section {
+        padding: 2rem 1.5rem;
+    }
+
+    .learning-section .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .learning-section .content h3 {
+        font-size: 1.4rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">ReMindHer</div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/pcod">PCOD Checker</a></li>
+            <li><a href="/menstrual_tracker">Menstrual Tracker</a></li>
+            <li><a href="#">Doctor</a></li>
+            <li><a href="#">Hormone Tracker</a></li>
+            <li><a href="/learn">Learning Section</a></li>
+            <li><a href="/signin">Sign in</a></li>
+            <li><a href="#">Log in</a></li>
+            <li><a href="#">Log out</a></li>
+            <li><button class="voice-btn" aria-label="Voice Assistance">🎤 Voice</button></li>
+        </ul>
+    </nav>
+    <section id="learning-pregnancy" class="learning-section py-5">
+    <div class="container">
+        <div class="section-header text-center mb-4">
+            <h2 class="display-5">Understanding Pregnancy</h2>
+            <p class="lead text-muted">A Comprehensive Overview of Pregnancy from Conception to Birth</p>
+        </div>
+
+        <article class="content">
+            <section class="mb-5">
+                <h3 class="h4">Introduction</h3>
+                <p>
+                    Pregnancy is a complex biological process that spans approximately 40 weeks, starting from fertilization and ending with childbirth. It involves significant hormonal, physical, and psychological changes. Proper understanding of each phase is crucial for maternal and fetal well-being.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Fertilization and Implantation</h3>
+                <p>
+                    Fertilization usually occurs in the fallopian tube when a sperm successfully fuses with an ovum. The zygote becomes a blastocyst and implants into the uterus around day 6–10 post-ovulation. Implantation is essential for the continuation of pregnancy.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Hormonal Changes in Pregnancy</h3>
+                <p>
+                    Hormones such as hCG, progesterone, estrogen, relaxin, and prolactin regulate the pregnancy. They maintain the uterine lining, support fetal growth, prepare the body for childbirth, and enable breastfeeding.
+                </p>
+                <ul>
+                    <li><strong>hCG:</strong> Maintains the corpus luteum</li>
+                    <li><strong>Progesterone:</strong> Prevents uterine contractions</li>
+                    <li><strong>Estrogen:</strong> Supports uterine and breast development</li>
+                    <li><strong>Relaxin:</strong> Softens ligaments and cervix</li>
+                    <li><strong>Prolactin:</strong> Prepares for lactation</li>
+                </ul>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Trimesters of Pregnancy</h3>
+                <p>
+                    Pregnancy is divided into three trimesters:
+                </p>
+                <ul>
+                    <li><strong>First Trimester (Weeks 1–12):</strong> Organs begin forming, heartbeat is detected, and risk of miscarriage is highest.</li>
+                    <li><strong>Second Trimester (Weeks 13–26):</strong> Fetal movement begins, gender identification possible, and growth accelerates.</li>
+                    <li><strong>Third Trimester (Weeks 27–40):</strong> Rapid fetal weight gain, lung maturity, and preparation for delivery.</li>
+                </ul>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Prenatal Care</h3>
+                <p>
+                    Regular check-ups monitor maternal and fetal health. This includes blood tests, ultrasounds, blood pressure monitoring, and fetal assessments. Supplements like folic acid, iron, and calcium are commonly prescribed to ensure healthy development.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Labor and Delivery</h3>
+                <p>
+                    Labor occurs in three stages:
+                </p>
+                <ol>
+                    <li><strong>Dilation:</strong> Cervix dilates to 10 cm</li>
+                    <li><strong>Expulsion:</strong> Baby is delivered</li>
+                    <li><strong>Placental:</strong> Placenta is expelled</li>
+                </ol>
+                <p>
+                    Delivery may be vaginal or cesarean depending on the circumstances.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Postpartum Period</h3>
+                <p>
+                    The postpartum phase, or puerperium, lasts six weeks after delivery. It involves uterine recovery, initiation of breastfeeding, and hormonal stabilization. Support is essential to monitor for complications such as postpartum depression.
+                </p>
+            </section>
+
+            <section>
+                <h3 class="h4">Conclusion</h3>
+                <p>
+                    Pregnancy is a transformative period requiring careful monitoring and support. A deep understanding of its stages enables early detection of risks and promotes safer outcomes for both mother and child. Prenatal care and education empower individuals to experience a healthy and fulfilling journey to motherhood.
+                </p>
+            </section>
+        </article>
+    </div>
+</section>
+
+
+
+
+</body>
+</html>

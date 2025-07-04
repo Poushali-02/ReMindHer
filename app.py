@@ -61,10 +61,29 @@ def menstrual_tracker():
 def learn():
     return render_template('learning.html')
 
-@app.route('/menstrual')
-def menstrual():
+@app.route('/learn_menstrual')
+def learn_menstrual():
     return render_template('menstrual.html')
 
+@app.route('/learn_pcod')
+def learn_pcod():
+    return render_template('pcodPcos.html')
+
+@app.route('/learn_pregnancy')
+def learn_pregnancy():
+    return render_template('pregnancy.html')
+
+@app.route('/learn_female_hygiene')
+def learn_female_hygiene():
+    return render_template('hygiene.html')
+
+@app.route('/learn_diet')
+def learn_diet():
+    return render_template('diet.html')
+
+@app.route('/learn_yoga')
+def learn_yoga():
+    return render_template('yoga.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

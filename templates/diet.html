@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dietary Guide</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Learning Section */
+.learning-section {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Header */
+.learning-section .section-header h2 {
+    font-size: 2.5rem;
+    color: #8b00c9;
+    font-weight: 700;
+}
+
+.learning-section .section-header p {
+    font-size: 1.2rem;
+    color: #5c0066;
+}
+
+/* Article Content */
+.learning-section .content {
+    margin-top: 2rem;
+    line-height: 1.7;
+    color: #2d033b;
+}
+
+.learning-section .content h3 {
+    font-size: 1.6rem;
+    margin-top: 2rem;
+    color: #9900cc;
+    border-left: 5px solid #d966ff;
+    padding-left: 10px;
+}
+
+.learning-section .content p {
+    margin-bottom: 1rem;
+}
+
+.learning-section .content ol,
+.learning-section .content ul {
+    margin-left: 1.5rem;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.learning-section .content li {
+    margin-bottom: 0.6rem;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+    .learning-section {
+        padding: 2rem 1.5rem;
+    }
+
+    .learning-section .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .learning-section .content h3 {
+        font-size: 1.4rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">ReMindHer</div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/pcod">PCOD Checker</a></li>
+            <li><a href="/menstrual_tracker">Menstrual Tracker</a></li>
+            <li><a href="#">Doctor</a></li>
+            <li><a href="#">Hormone Tracker</a></li>
+            <li><a href="/learn">Learning Section</a></li>
+            <li><a href="/signin">Sign in</a></li>
+            <li><a href="#">Log in</a></li>
+            <li><a href="#">Log out</a></li>
+            <li><button class="voice-btn" aria-label="Voice Assistance">🎤 Voice</button></li>
+        </ul>
+    </nav>
+    <section id="learning-female-nutrition" class="learning-section py-5">
+    <div class="container">
+        <div class="section-header text-center mb-4">
+            <h2 class="display-5">Nutrition & Diet</h2>
+            <p class="lead text-muted">Understand Female-Specific Dietary Needs Across Life Stages</p>
+        </div>
+
+        <article class="content">
+            <section class="mb-5">
+                <h3 class="h4">Introduction</h3>
+                <p>
+                    Nutrition plays a key role in every stage of a woman’s life. Female bodies experience unique phases such as menstruation, pregnancy, and menopause — each requiring tailored nutritional support. A balanced diet is essential for hormonal balance, immunity, bone health, energy, and mental clarity.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Why Female Nutrition Needs Are Unique</h3>
+                <p>
+                    Biological factors like iron loss during periods, increased demands during pregnancy, and estrogen decline after menopause influence dietary needs. Poor nutrition can lead to conditions like anemia, osteoporosis, PCOS, and fatigue.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Nutrition During Adolescence (10–19)</h3>
+                <ul>
+                    <li><strong>Iron:</strong> Leafy greens, lentils, jaggery</li>
+                    <li><strong>Calcium & Vitamin D:</strong> Dairy, ragi, sesame, sunlight</li>
+                    <li><strong>Protein:</strong> Pulses, eggs, paneer</li>
+                    <li><strong>Healthy Fats:</strong> Nuts, seeds, ghee</li>
+                </ul>
+                <p>Encourage healthy eating habits, limit junk food, and promote body positivity.</p>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Reproductive Years (20–40)</h3>
+                <ul>
+                    <li><strong>Folic Acid:</strong> Leafy vegetables, legumes</li>
+                    <li><strong>Iron & B12:</strong> Dates, beets, meat or fortified foods</li>
+                    <li><strong>Magnesium:</strong> Pumpkin seeds, dark chocolate</li>
+                    <li><strong>Zinc:</strong> Whole grains, seeds</li>
+                </ul>
+                <p>PCOS? Focus on low-glycemic foods and reduce refined carbs.</p>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Pregnancy & Lactation</h3>
+                <ul>
+                    <li><strong>Folic Acid & Iron:</strong> To support baby's growth</li>
+                    <li><strong>Protein:</strong> For cell and tissue formation</li>
+                    <li><strong>Omega-3s:</strong> For brain development</li>
+                    <li><strong>Calcium:</strong> For bones and teeth</li>
+                    <li><strong>Hydration:</strong> 8–10 glasses of water daily</li>
+                </ul>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Menopause (45+)</h3>
+                <ul>
+                    <li><strong>Calcium & Vitamin D:</strong> Prevents bone loss</li>
+                    <li><strong>Phytoestrogens:</strong> Soy, flaxseeds</li>
+                    <li><strong>Fiber & Omega-3s:</strong> For heart and digestion</li>
+                </ul>
+                <p>Reduce caffeine and sugar, increase whole foods and exercise.</p>
+            </section>
+
+            <section class="mb-5">
+                <h3 class="h4">Older Adulthood (60+)</h3>
+                <ul>
+                    <li><strong>Protein:</strong> To maintain muscle mass</li>
+                    <li><strong>Vitamin B12:</strong> For brain and nerve function</li>
+                    <li><strong>Fluids & Fiber:</strong> To avoid constipation</li>
+                    <li><strong>Low Sodium:</strong> For heart and kidney health</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3 class="h4">Conclusion</h3>
+                <p>
+                    A woman’s nutritional needs evolve with age. Awareness, timely dietary changes, and self-care can transform health outcomes. Nourishing the body with the right foods is a powerful act of self-love and strength.
+                </p>
+            </section>
+        </article>
+    </div>
+</section>
+
+</body>
+</html>
