@@ -1,8 +1,29 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, session, redirect, url_for
 import sqlite3
-from database import init_db
+from database import init_db, get_user_by_id, delete_user, update_user, add_user, get_user_by_email
 from datetime import datetime
+from dotenv import load_dotenv
+from datetime import timedelta
+from functools import wraps
+import os
+from werkzeug.security import generate_password_hash, check_password_hash
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('logged_in') or not session.get('id'):
+            session.clear()
+            return redirect(url_for('login'))  # Redirect to login
+        return f(*args, **kwargs)
+    return decorated_function
+   
 app = Flask(__name__)
+
+app.permanent_session_lifetime = timedelta(days=7)
+
+load_dotenv()
+
+app.secret_key = os.getenv('SECRET_KEY')
 
 init_db()
 
@@ -10,32 +31,130 @@ init_db()
 def main():
     return render_template('index.html')
 
+# profile section
+
+@app.route('/profile')
+@login_required
+def profile():
+    user_id = session.get('id')
+    if not user_id:
+        session.clear()
+        return redirect(url_for('login'))
+
+    user = get_user_by_id(user_id)
+    if not user:
+        session.clear()
+        return redirect(url_for('signin'))
+    
+    return render_template('profile.html', user=user)
+
+# edit profile
+
+@app.route('/edit_field/<field>', methods=['POST'])
+@login_required
+def edit_field(field):
+    user_id = session.get('id')
+    user = get_user_by_id(user_id)
+    if not user:
+        return redirect(url_for('signin'))
+    
+    value = request.form.get('value')
+    allowed_fields = ['username', 'email', 'password', 'age', 'phone', 'locality', 'language']
+    if field not in allowed_fields:
+        return redirect(url_for('profile'))
+    
+    updated_data = {**user, field: value}
+    update_user(
+        user_id,
+        updated_data['username'],
+        updated_data['email'],
+        updated_data['age'],
+        updated_data['phone'],
+        updated_data['locality'],
+        updated_data['language']
+        )
+    return redirect(url_for('profile'))
+
+# sign in
+
 @app.route('/signin', methods=['POST','GET'])
 def signin():
+    if session.get('logged_in'):
+        return redirect(url_for('profile'))
+    
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
+        password = request.form['password']
         age = request.form['age']
         phone = request.form['phone']
         locality = request.form['locality']
-        language = request.form['language']
+        language = request.form['language']        
+        
+        # check for duplicate mail
+        if get_user_by_email(email):
+            return render_template('signin.html', message="Email already registered.")
 
-        # Save to database
-        conn = sqlite3.connect('users.db')
-        c = conn.cursor()
-        c.execute("INSERT INTO users (username, email, age, phone, locality, language) VALUES (?, ?, ?, ?, ?, ?)", 
-                  (username, email, age, phone, locality, language))
-        conn.commit()
-        conn.close()
-
-        return render_template('signin.html', message="User registered successfully!")
+        hashed = generate_password_hash(password)
+        
+    
+        user_id = add_user(username, email, hashed, age, phone, locality, language)
+        
+        # Set session variables
+        session['id'] = user_id
+        session['logged_in'] = True
+        session['username'] = username
+        session.permanent = True
+        
+        return redirect(url_for('main'))
     return render_template('signin.html')
 
+# log in
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if session.get('logged_in') and session.get('id'):
+        return redirect(url_for('profile'))
+
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        user = get_user_by_email(email)
+        if user and check_password_hash(user['password'], password):
+            session['id'] = user['id']
+            session['logged_in'] = True
+            session['username'] = user['username']
+            session.permanent = True
+            return redirect(url_for('profile'))
+        else:
+            return render_template('login.html', message="Invalid email or password.")
+    return render_template('login.html')
+
+# log out
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return redirect(url_for('main'))
+
+# delete
+
+@app.route('/delete_account', methods=['POST'])
+@login_required
+def delete_account():
+    user_id = session.get('id')
+    if user_id:
+        delete_user(user_id)
+    session.clear()
+    return redirect(url_for('main'))
+
+
 @app.route('/pcod', methods=['POST','GET'])
+@login_required
 def pcod_checker():
     return render_template('pcod.html')
 
 @app.route('/menstrual_tracker', methods=['POST','GET'])
+@login_required
 def menstrual_tracker():
     if request.method == 'POST':
         

@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PCOD TRACKER</title>
+    <title>PCOD PREDICTION</title>
 </head>
 <body>
-    
+    <form action="/predict_pcod">
+        <label for="symptoms">Describe your symptoms : </label><br>
+        <textarea name="symptoms" rows="6" cols="60" placeholder="eg. stomachache, irregular periods, etc" required></textarea><br>
+        <label for="weight">Kindly enter your Weight : </label>
+        <input type="number" name="weight" placeholder="eg. 60" required><br>
+        <label for="height">Kindly enter your Height in Inches : </label>
+        <input type="number" name="height" placeholder="eg. 5.3 " required><br>
+    </form>
 </body>
 </html>

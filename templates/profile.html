@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile - ReMindHer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>/* Modern Profile Page Styles */
+.profile-container {
+    max-width: 520px;
+    margin: 4rem auto;
+    padding: 3rem 2rem;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(161, 0, 201, 0.08);
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2d033b;
+    transition: all 0.3s ease;
+}
+
+.profile-container h2 {
+    text-align: center;
+    color: #a100c9;
+    margin-bottom: 2.5rem;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+.user-info p {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #3a003f;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.6rem;
+}
+
+.user-info strong {
+    color: #a100c9;
+    font-weight: 600;
+    font-size: 1.05rem;
+    min-width: 120px;
+}
+
+.edit-inline-form {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
+
+.edit-inline-form input[type="text"],
+.edit-inline-form input[type="email"],
+.edit-inline-form input[type="number"] {
+    background-color: #f5ebff;
+    border: 1px solid #d4b3f3;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    color: #3a003f;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 160px;
+}
+
+.edit-inline-form input:focus {
+    border-color: #a100c9;
+    box-shadow: 0 0 0 2px rgba(161, 0, 201, 0.15);
+    outline: none;
+    background-color: #fff;
+}
+
+.edit-btn {
+    background: #a100c9;
+    color: white;
+    border: none;
+    padding: 0.45rem 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.edit-btn:hover {
+    background: #b224d1;
+    box-shadow: 0 4px 12px rgba(161, 0, 201, 0.3);
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.logout-btn,
+.delete-btn {
+    flex: 1;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 2px solid;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn {
+    color: #a100c9;
+    border-color: #a100c9;
+    background: white;
+}
+
+.logout-btn:hover {
+    background: #4a005f;
+    color: #f3e1ff;
+    box-shadow: 0 4px 12px rgba(161, 0, 201, 0.1);
+}
+
+.delete-btn {
+    color: #ff4d79;
+    border-color: #ff4d79;
+    background: white;
+}
+
+.delete-btn:hover {
+    background: #ff4d79;
+    color: #ffe9f0;
+    box-shadow: 0 4px 12px rgba(184, 3, 48, 0.15);
+}
+
+@media (max-width: 600px) {
+    .profile-container {
+        padding: 2rem 1.2rem;
+    }
+
+    .user-info strong {
+        min-width: 100px;
+    }
+
+    .edit-inline-form input {
+        width: 100px;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
+</style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">ReMindHer</div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/pcod">PCOD Checker</a></li>
+            <li><a href="/menstrual_tracker">Menstrual Tracker</a></li>
+            <li><a href="#">Doctor</a></li>
+            <li><a href="#">Hormone Tracker</a></li>
+            <li><a href="/learn">Learning Section</a></li>
+            {% if session.logged_in %}
+                <li><a href="/profile"><i class="fa-solid fa-address-card"></i></a></li>
+            {% else %}
+                <li><a href="/signin">Sign in</a></li>
+                <li><a href="/login">Log in</a></li>
+            {% endif %}
+            
+            <li><button class="voice-btn" aria-label="Voice Assistance">🎤 Voice</button></li>
+        </ul>
+    </nav>
+    <div class="profile-container">
+        <h2>Welcome, {{ user.username }}</h2>
+
+        <div class="user-info">
+            <p>
+                <strong>Email:</strong> {{ user.email }}
+                <form class="edit-inline-form" action="{{ url_for('edit_field', field='email') }}" method="post">
+                    <input type="email" name="value" value="{{ user.email }}" required>
+                    <button class="edit-btn" type="submit">Edit</button>
+                </form>
+            </p>
+            <p>
+                <strong>Username:</strong> {{ user.username }}
+                <form class="edit-inline-form" action="{{ url_for('edit_field', field='username') }}" method="post">
+                    <input type="text" name="value" value="{{ user.username }}" required>
+                    <button class="edit-btn" type="submit">Edit</button>
+                </form>
+            </p>
+            <p>
+                <strong>Age:</strong> {{ user.age }}
+                <form class="edit-inline-form" action="{{ url_for('edit_field', field='age') }}" method="post">
+                    <input type="number" name="value" value="{{ user.age }}">
+                    <button class="edit-btn" type="submit">Edit</button>
+                </form>
+            </p>
+            <p>
+                <strong>Phone:</strong> {{ user.phone }}
+                <form class="edit-inline-form" action="{{ url_for('edit_field', field='phone') }}" method="post">
+                    <input type="text" name="value" value="{{ user.phone }}">
+                    <button class="edit-btn" type="submit">Edit</button>
+                </form>
+            </p>
+            <p>
+                <strong>Locality:</strong> {{ user.locality }}
+                <form class="edit-inline-form" action="{{ url_for('edit_field', field='locality') }}" method="post">
+                    <input type="text" name="value" value="{{ user.locality }}">
+                    <button class="edit-btn" type="submit">Edit</button>
+                </form>
+            </p>
+            <p>
+                <strong>Language:</strong> {{ user.language }}
+                <form class="edit-inline-form" action="{{ url_for('edit_field', field='language') }}" method="post">
+                    <input type="text" name="value" value="{{ user.language }}">
+                    <button class="edit-btn" type="submit">Edit</button>
+                </form>
+            </p>
+        </div>
+        <div class="profile-actions">
+            <form action="/logout" method="post">
+                <button type="submit" class="logout-btn">Log out</button>
+            </form>
+            <form action="/delete_account" method="post">
+                <button type="submit" class="delete-btn">Delete</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
