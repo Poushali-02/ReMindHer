@@ -1,5 +1,7 @@
-from flask import Flask, request, jsonify, render_template, session, redirect, url_for
-import sqlite3
+from flask import Flask, request, render_template, session, redirect, url_for
+from markupsafe import Markup 
+from pcodPredict import ask_assistant
+import markdown as md
 from database import init_db, get_user_by_id, delete_user, update_user, add_user, get_user_by_email
 from datetime import datetime
 from dotenv import load_dotenv
@@ -147,11 +149,43 @@ def delete_account():
     session.clear()
     return redirect(url_for('main'))
 
+# pcod prediction
 
 @app.route('/pcod', methods=['POST','GET'])
 @login_required
 def pcod_checker():
+    user_id = session.get('id')
+    user = get_user_by_id(user_id)
+        
+    if not user:
+        session.clear()
+        return redirect(url_for('signin'))
+    
+    if request.method == 'POST':
+        
+        symptoms = request.form['symptoms']
+        weight = request.form['weight']
+        height = request.form['height']
+        age = user['age']
+
+        # Validate inputs
+        if not symptoms or not weight or not height or not age:
+            return render_template('pcod.html', message="Please fill in all fields.")
+
+        try:
+            weight = float(weight)
+            height = float(height)
+            age = int(age)
+        except ValueError:
+            return render_template('pcod.html', message="Invalid input. Please enter valid numbers.")
+
+        # Call the assistant function
+        advice = ask_assistant(symptoms, weight, height, age)
+        advice = Markup(md.markdown(advice))  # Convert Markdown to HTML
+        return render_template('pcod.html', advice=advice)
     return render_template('pcod.html')
+
+# menstrual cycle prediction
 
 @app.route('/menstrual_tracker', methods=['POST','GET'])
 @login_required
@@ -164,17 +198,24 @@ def menstrual_tracker():
         end_date = datetime.strptime(end, '%Y-%m-%d').date()
 
         # Calculate the cycle length
-        cycle_length = (end_date - start_date).days
-
-        # Check for regularity
-        if 26 <= cycle_length <= 32:
-            message = "Your cycle is regular."
+        
+        length = (end_date - start_date).days
+        
+        if length == 28:
+            message = "Your cycle length is exactly 28 days — the average and most common cycle length."
+            colour = "green"
+        if length < 21 or length > 35:
+            message = "Your cycle length is outside the normal range. Please consult a healthcare professional."
+            colour = "red"
         else:
-            message = "Your cycle is irregular."
-
-        return render_template('periods.html', message=message)
+            message = "Your cycle length is within the normal range. You can track your periods effectively."
+            colour = 'blue'
+        return render_template('periods.html', message=message, colour=colour)
 
     return render_template('periods.html')
+
+# learning pages routes
+
 
 @app.route('/learn')
 def learn():
