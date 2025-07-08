@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from datetime import timedelta
 from functools import wraps
 import os
+from doctors import get_doctors
 from werkzeug.security import generate_password_hash, check_password_hash
 
 def login_required(f):
@@ -213,6 +214,32 @@ def menstrual_tracker():
         return render_template('periods.html', message=message, colour=colour)
 
     return render_template('periods.html')
+
+# Doctors
+
+@app.route('/doctors',methods=['POST', 'GET'])
+def doctors():
+    if request.method == 'POST':
+        location = request.form.get('location')
+        if not location:
+            return render_template('doctors.html', message="Please enter a location.")
+        print(f"Searching for doctors in: {location}")
+        try:
+            doctors_list = get_doctors(location)
+            if not doctors_list:
+                return render_template('doctors.html', message="No doctors found for the specified location.")
+            print(f"{doctors_list}")
+            return render_template('doctors.html', doctors=doctors_list)
+        except Exception as e:
+            return render_template('doctors.html', message=f"An error occurred: {str(e)}")
+    print('get')
+    return render_template('doctors.html')
+
+# Hormone tracker
+
+@app.route('/hormone_tracker', methods=['POST', 'GET'])
+def hormone_tracker():
+    return render_template('hormoneTracker.html')
 
 # learning pages routes
 

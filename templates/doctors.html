@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors near you</title>
+    <link rel="stylesheet" href="static/style.css">
+    <style>
+        /* Doctors Page Styles */
+.container {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(161, 0, 201, 0.08);
+    max-width: 540px;
+    margin: 3rem auto 2rem auto;
+    padding: 2.2rem 2rem 1.5rem 2rem;
+}
+
+.container h1 {
+    color: #a100c9;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.container li {
+    background: #f8f0ff;
+    border-radius: 10px;
+    margin-bottom: 1.2rem;
+    padding: 1.1rem 1rem 0.7rem 1rem;
+    box-shadow: 0 2px 8px rgba(162, 0, 201, 0.06);
+    color: #4a005f;
+    font-size: 1.08rem;
+}
+
+.container li strong {
+    color: #a100c9;
+    font-size: 1.13rem;
+}
+
+.container a {
+    color: #a100c9;
+    background: #e0b3ff1a;
+    padding: 0.3rem 0.9rem;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+
+.container a:hover {
+    background: #a100c9;
+    color: #fff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+form label {
+    font-weight: 600;
+    color: #a100c9;
+    margin-bottom: 0.3rem;
+    font-size: 1.08rem;
+}
+
+form input[type="number"] {
+    padding: 0.6rem 1rem;
+    border: 1.5px solid #e0b3ff;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #f8f0ff;
+    color: #4a005f;
+    margin-bottom: 0.5rem;
+    width: 220px;
+    transition: border 0.2s;
+}
+
+form input[type="number"]:focus {
+    border: 1.5px solid #a100c9;
+    outline: none;
+}
+
+form input[type="submit"] {
+    background: #a100c9;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 0.6rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+form input[type="submit"]:hover {
+    background: #cc33ff;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 1.2rem 0.6rem;
+        max-width: 98vw;
+    }
+    form input[type="number"] {
+        width: 100%;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">ReMindHer</div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/pcod">PCOD Checker</a></li>
+            <li><a href="/menstrual_tracker">Menstrual Tracker</a></li>
+            <li><a href="/doctors">Doctor</a></li>
+            <li><a href="/hormone_tracker">Hormone Tracker</a></li>
+            <li><a href="/learn">Learning Section</a></li>
+            {% if session.logged_in %}
+                <li><a href="/profile"><i class="fa-solid fa-address-card"></i></a></li>
+            {% else %}
+                <li><a href="/signin">Sign in</a></li>
+                <li><a href="/login">Log in</a></li>
+            {% endif %}
+            
+            <li><button class="voice-btn" aria-label="Voice Assistance">🎤 Voice</button></li>
+        </ul>
+    </nav>
+    <div class="container">
+        {% if doctors %}
+            <h1>Doctors near you</h1>
+            <ul>
+                {% for doc in doctors %}
+                    <li>
+                        <strong>{{ doc.name }}</strong><br>
+                        Address: {{ doc.address }}<br>
+                        Rating: {{ doc.rating }}<br>
+                        <a href="{{ doc.maps_url }}" target="_blank">View on Google Maps</a>
+                    </li><br>
+                {% endfor %}
+            </ul>
+        {% elif message %}
+            <p>{{ message }}</p>
+        {% else %}
+        <form action="/doctors" method="post">
+            <label for="location">Enter your location:</label>
+            <input type="text" id="location" name="location" required>
+            <input type="submit">Find Doctors</input>
+        </form>
+        {% endif %}
+        
+    </div>
+</body>
+</html>
