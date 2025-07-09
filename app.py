@@ -10,6 +10,7 @@ from functools import wraps
 import os
 from doctors import get_doctors
 from werkzeug.security import generate_password_hash, check_password_hash
+from hormone import ask_about_hormones
 
 def login_required(f):
     @wraps(f)
@@ -239,7 +240,31 @@ def doctors():
 
 @app.route('/hormone_tracker', methods=['POST', 'GET'])
 def hormone_tracker():
-    return render_template('hormoneTracker.html')
+    if request.method == 'POST':
+        Age = request.form['age']
+        Gender = request.form['gender']
+        Weight = request.form['weight']
+        Height = request.form['height']
+        Menstrualhistory =request.form['menstrual_history']
+        symptoms = request.form['symptoms']
+        Lifestylefactors = request.form['lifestyle_factors']
+        Medicalhistory = request.form['medical_history']
+
+        # validate inputs
+        if not Age or not Gender or not Weight or not Height or not Menstrualhistory or not symptoms or not Lifestylefactors or not Medicalhistory:
+            return render_template('hormoneTracker.html', message="Please fill in all fields.")
+        try:
+            Age = int(Age)
+            Weight = float(Weight)
+            Height = float(Height)
+        except ValueError:
+            return render_template('hormoneTracker.html', message="Invalid input. Please enter valid numbers.")
+        # Call the assistant function
+        response = ask_about_hormones(Age, Gender, Weight, Height, Menstrualhistory, symptoms, Lifestylefactors, Medicalhistory)
+        response = Markup(md.markdown(response))  # Convert Markdown to HTML
+        return render_template('hormoneTracker.html', response=response)
+        
+    return render_template('hormoneTracker.html') 
 
 # learning pages routes
 
