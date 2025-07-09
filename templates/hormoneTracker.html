@@ -9,64 +9,75 @@
     <style>
         /* Hormone Tracker Form Styles */
 form[action="/hormone_tracker"] {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 16px;
-  box-shadow: 0 4px 18px rgba(161, 0, 201, 0.08);
-  max-width: 480px;
-  margin: 2.5rem auto;
-  padding: 2rem 2rem 1.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.3rem;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(161, 0, 201, 0.08);
+    max-width: 480px;
+    margin: 2.5rem auto 2rem auto;
+    padding: 2rem 2rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
 }
 
 form[action="/hormone_tracker"] label {
-  font-weight: 600;
-  color: #a100c9;
-  margin-bottom: 0.3rem;
-  display: block;
-  font-size: 1.08rem;
+    font-weight: 600;
+    color: #a100c9;
+    margin-bottom: 0.3rem;
+    display: block;
+    font-size: 1.08rem;
 }
 
 form[action="/hormone_tracker"] textarea,
 form[action="/hormone_tracker"] input[type="number"] {
-  width: 100%;
-  padding: 0.7rem 1rem;
-  border: 1.5px solid #e0b3ff;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: #f8f0ff;
-  color: #4a005f;
-  margin-top: 0.3rem;
-  margin-bottom: 0.5rem;
-  transition: border 0.2s;
-  resize: vertical;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1.5px solid #e0b3ff;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #f8f0ff;
+    color: #4a005f;
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+    transition: border 0.2s;
+    resize: vertical;
 }
 
 form[action="/hormone_tracker"] textarea:focus,
 form[action="/hormone_tracker"] input[type="number"]:focus {
-  border: 1.5px solid #a100c9;
-  outline: none;
+    border: 1.5px solid #a100c9;
+    outline: none;
 }
 
 form[action="/hormone_tracker"] button,
-form[action="/hormone_tracker"] input[type="submit"] {
-  background: #a100c9;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  padding: 0.6rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 0.7rem;
-  align-self: flex-end;
-  transition: background 0.2s;
+form[action="/hormone_tracker"] input[type="submit"]{
+    background: #a100c9;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 0.6rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 0.7rem;
+    align-self: flex-end;
+    transition: background 0.2s;
+}
+
+form[action="/hormone_tracker"] select {
+    background: #fff;
+    color: #a100c9;
+    border-radius: 20px;
+    padding: 0.6rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
 form[action="/hormone_tracker"] button:hover,
 form[action="/hormone_tracker"] input[type="submit"]:hover {
-  background: #cc33ff;
+    background: #cc33ff;
 }
 
 .hormone_tracker-container {
@@ -78,28 +89,30 @@ form[action="/hormone_tracker"] input[type="submit"]:hover {
     padding: 2.2rem 2rem 1.5rem 2rem;
 }
 
-/* Optional: if you show AI result below */
-.advice-box {
-  margin-top: 2rem;
-  background: #f8f0ff;
-  border-radius: 10px;
-  padding: 1.2rem 1rem;
-  box-shadow: 0 2px 8px rgba(162, 0, 201, 0.06);
-  color: #4a005f;
-  font-size: 1.08rem;
+.response-box {
+    margin-top: 2rem;
+    background: #f8f0ff;
+    border-radius: 10px;
+    padding: 1.2rem 1rem;
+    box-shadow: 0 2px 8px rgba(162, 0, 201, 0.06);
+    color: #4a005f;
+    font-size: 1.08rem;
+}
+.response-box h2 {
+    color: #a100c9;
+    margin-bottom: 0.7rem;
+}
+form[action="/hormone_tracker"] button i {
+    font-size: 1.2rem;
+    vertical-align: middle;
+    color: #fff;
 }
 
-.advice-box h3 {
-  color: #a100c9;
-  margin-bottom: 0.7rem;
-}
-
-/* Responsive */
 @media (max-width: 600px) {
-  form[action="/hormone_tracker"] {
-    padding: 1.2rem 0.6rem;
-    max-width: 98vw;
-  }
+    form[action="/hormone_tracker"] {
+        padding: 1.2rem 0.6rem;
+        max-width: 98vw;
+    }
 }
 
     </style>
@@ -131,47 +144,65 @@ form[action="/hormone_tracker"] input[type="submit"]:hover {
         </ul>
     </nav>
 
-
     <div class="hormone_tracker-container">
         <div class="response-box">
             {% if response %}
-            <h2>response from Gemini</h2>
+            <h2>Response from Gemini</h2>
             <p>{{ response | safe }}</p>
         </div>
          {% else %}
-  <form method="POST" action="/hormone_tracker">
-    <label>Age:</label>
-    <input type="number" name="age" required>
+            <form method="POST" action="/hormone_tracker">
+                <label>Age:</label>
+                <input type="number" name="age" required>
 
-    <label>Gender:</label>
-    <select name="gender" required>
-      <option value="Female">Female</option>
-      <option value="Male">Male</option>
-      <option value="Other">Other</option>
-    </select>
+                <label>Gender:</label>
+                <select name="gender" required>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Other">Other</option>
+                </select>
 
-    <label>Weight (kg):</label>
-    <input type="number" name="weight" required>
+                <label>Weight (kg):</label>
+                <input type="number" name="weight" required>
 
-    <label>Height (cm):</label>
-    <input type="number" name="height" placeholder="5.3" step="any" required>
+                <label>Height (cm):</label>
+                <input type="number" name="height" placeholder="5.3" step="0.1" required>
 
-    <label>Menstrual History:</label>
-    <textarea name="menstrual_history" rows="2"></textarea>
+                <label>Menstrual History:</label>
+                <textarea name="menstrual_history" rows="2"></textarea>
 
-    <label>Symptoms:</label>
-    <textarea name="symptoms" rows="3" placeholder="E.g., fatigue, acne, mood swings"></textarea>
+                <label>Symptoms:</label>
+                <textarea name="symptoms" rows="3" placeholder="E.g., fatigue, acne, mood swings"></textarea>
 
-    <label>Lifestyle Factors:</label>
-    <textarea name="lifestyle_factors" rows="2" placeholder="E.g., high stress, poor sleep"></textarea>
+                <label>Lifestyle Factors:</label>
+                <textarea name="lifestyle_factors" rows="2" placeholder="E.g., high stress, poor sleep"></textarea>
 
-    <label>Medical History:</label>
-    <textarea name="medical_history" rows="2" placeholder="E.g., PCOD, thyroid, etc."></textarea>
+                <label>Medical History:</label>
+                <textarea name="medical_history" rows="2" placeholder="E.g., PCOD, thyroid, etc."></textarea>
 
-    <button type="submit">Analyze My Hormones</button>
-  </form>
+                <button type="submit" id="analyzeBtn">
+                    <span id="btnText">Analyze My Hormones</span>
+                    <i id="btnLoader" class="fa-solid fa-spinner fa-spin" style="margin-left: 8px; display: none;"></i>
+                </button>
+        </form>
        {% endif %}
     </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector('form[action="/hormone_tracker"]');
+        const analyzeBtn = document.getElementById("analyzeBtn");
+        const btnText = document.getElementById("btnText");
+        const btnLoader = document.getElementById("btnLoader");
 
+        if (form) {
+            form.addEventListener("submit", function () {
+                btnText.textContent = ""; // Remove text
+                btnLoader.style.display = "inline-block"; // Show loader
+                analyzeBtn.disabled = true; // Prevent double submission
+            });
+        }
+    });
+
+</script>
 </body>
 </html>

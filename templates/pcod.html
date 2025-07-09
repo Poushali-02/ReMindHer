@@ -91,6 +91,12 @@ form[action="/pcod"] input[type="submit"]:hover {
     color: #a100c9;
     margin-bottom: 0.7rem;
 }
+form[action="/hormone_tracker"] button i {
+    font-size: 1.2rem;
+    vertical-align: middle;
+    color: #fff;
+}
+
 @media (max-width: 600px) {
     form[action="/pcod"] {
         padding: 1.2rem 0.6rem;
@@ -132,16 +138,36 @@ form[action="/pcod"] input[type="submit"]:hover {
             <p>{{ advice | safe }}</p>
     </div>
         {% else %}
-    <form action="/pcod" method="post">
-        <label for="symptoms">Describe your symptoms : </label><br>
-        <textarea name="symptoms" rows="6" cols="60" placeholder="eg. stomachache, irregular periods, etc" required></textarea><br>
-        <label for="weight">Kindly enter your Weight : </label>
-        <input type="number" name="weight" placeholder="eg. 60" required><br>
-        <label for="height">Kindly enter your Height in Inches : </label>
-        <input type="number" name="height" placeholder="eg. 5.3 " step = 'any' required><br>
-        <input type="submit" value="Predict PCOD" class="btn btn-primary">
-    </form>
+        <form action="/pcod" method="post">
+            <label for="symptoms">Describe your symptoms : </label><br>
+            <textarea name="symptoms" rows="6" cols="60" placeholder="eg. stomachache, irregular periods, etc" required></textarea><br>
+            <label for="weight">Kindly enter your Weight : </label>
+            <input type="number" name="weight" placeholder="eg. 60" step="0.1" required><br>
+            <label for="height">Kindly enter your Height in Inches : </label>
+            <input type="number" name="height" placeholder="eg. 5.3 " step = 'any' required><br>
+            <button type="submit" id="analyzeBtn">
+                <span id="btnText">Chances of PCOD</span>
+                <i id="btnLoader" class="fa-solid fa-spinner fa-spin" style="margin-left: 8px; display: none;"></i>
+            </button>
+        </form>
         {% endif %}
     </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector('form[action="/pcod"]');
+        const analyzeBtn = document.getElementById("analyzeBtn");
+        const btnText = document.getElementById("btnText");
+        const btnLoader = document.getElementById("btnLoader");
+
+        if (form) {
+            form.addEventListener("submit", function () {
+                btnText.textContent = ""; // Remove text
+                btnLoader.style.display = "inline-block"; // Show loader
+                analyzeBtn.disabled = true; // Prevent double submission
+            });
+        }
+    });
+
+</script>
 </body>
 </html>
